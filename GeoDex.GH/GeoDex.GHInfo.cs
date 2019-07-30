@@ -2,7 +2,7 @@
 using System.Drawing;
 using Grasshopper.Kernel;
 
-namespace GeoDex.GH
+namespace Geodex.GH
 {
     public class GeoDexGHInfo : GH_AssemblyInfo
   {

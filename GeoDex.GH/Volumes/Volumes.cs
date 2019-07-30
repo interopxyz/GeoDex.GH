@@ -3,11 +3,18 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
+using System.Windows.Forms;
+using System.Linq;
 
 namespace Geodex.GH.Volumes
 {
     public class Volumes : GH_Component
     {
+        public int selectedIndex = 0;
+        private string[] entries = { "Alain", "Besace_A", "Besace_B", "Bifolium", "Biquartic", "BoothsLemniscate", "BoothsOvals", "Cassini", "Circle", "Ellipse", "Folium", "FreethNephroid", "Limacon", "Lissajous", "Plateau", "SuperEllipse", "Teardrop" };
+        
+        public List<ToolStripMenuItem> items = new List<ToolStripMenuItem>();
+
         /// <summary>
         /// Initializes a new instance of the Volumes class.
         /// </summary>
@@ -29,6 +36,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
+            pManager.AddTextParameter("Test", "T", "---", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -36,6 +44,39 @@ namespace Geodex.GH.Volumes
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
+        {
+                Vector3d uv = new Vector3d();
+                DA.GetData(0, ref uv);
+
+
+                DA.SetData(0, selectedIndex);
+            }
+
+        public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
+        {
+
+            base.AppendAdditionalMenuItems(menu);
+            Menu_AppendSeparator(menu);
+
+            for (int i = 0; i < entries.Count(); i++)
+            {
+                ToolStripMenuItem item = Menu_AppendItem(menu, i.ToString(), ModeE, true, selectedIndex == i);
+                item.Click -= (o, e) => { SetObject(o, e, menu); };
+                item.Click += (o, e) => { SetObject(o, e, menu); };
+                
+            }
+        }
+        
+        private void SetObject(Object sender, EventArgs e, ToolStripDropDown menu)
+        {
+
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            selectedIndex = menu.Items.IndexOf(item)-4;
+
+            ExpireSolution(true);
+        }
+
+        private void ModeE(Object sender, EventArgs e)//Additive
         {
         }
 
