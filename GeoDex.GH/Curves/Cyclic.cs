@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
-using System.Linq;
-
-using Geodex;
-using System.Collections;
-using System.Windows.Forms;
-using System.Drawing;
 
 namespace Geodex.GH.Curves
 {
-    public class Closed : GeodexBase
+    public class Cyclic : GeodexBase
     {
-
         /// <summary>
-        /// Initializes a new instance of the Closed class.
+        /// Initializes a new instance of the Cyclic class.
         /// </summary>
-        public Closed()
-          : base("Closed Curve Plots", "Closed Curve", "A series of closed curve equations", "Vector", "Plots")
+        public Cyclic()
+          : base("Cyclic Curve Plots", "Cyclic Curve", "A series of closed curve equations", "Vector", "Plots")
         {
-            entries = new string[] { "Alain", "Besace_A", "Besace_B", "Bifolium", "Biquartic", "BoothsLemniscate", "BoothsOvals", "Cassini", "Circle", "Ellipse", "Folium", "FreethNephroid", "Limacon", "Lissajous", "Plateau", "SuperEllipse", "Teardrop" };
+            Geodex.Curves.Cyclic.CyclicHarmonic
+                Geodex.Curves.Cyclic.Epicycloid
+                Geodex.Curves.Cyclic.Epitrochoid
+                Geodex.Curves.Cyclic.Hypocycloid_A
+                Geodex.Curves.Cyclic.Hypocycloid_B
+                Geodex.Curves.Cyclic.Hypotrochoid
+                Geodex.Curves.Cyclic.Leaf
+                Geodex.Curves.Cyclic.Rhodonea
+                Geodex.Curves.Cyclic.Rose
+                Geodex.Curves.Cyclic.Superformula
+            entries = new string[] { "Epicycloid", "Epitrochoid", "Hypocycloid_A", "Hypocycloid_B", "Hypotrochoid", "BoothsLemniscate", "BoothsOvals", "Cassini", "Circle", "Ellipse", "Folium", "FreethNephroid", "Limacon", "Lissajous", "Plateau", "SuperEllipse", "Teardrop" };
             inputs = new int[] { 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 1, 2, 3, 2, 3, 1 };
         }
 
@@ -67,10 +69,10 @@ namespace Geodex.GH.Curves
             {
 
                 case "Alain":
-                    pt = new Geodex.Curves.Closed.Alain(t,v[0],v[1]).Location;
+                    pt = new Geodex.Curves.Closed.Alain(t, v[0], v[1]).Location;
                     break;
                 case "Besace A":
-                    pt = new Geodex.Curves.Closed.Besace_A(t,v[0],v[1]).Location;
+                    pt = new Geodex.Curves.Closed.Besace_A(t, v[0], v[1]).Location;
                     break;
                 case "Besace B":
                     pt = new Geodex.Curves.Closed.Besace_B(t, v[0], v[1]).Location;
@@ -100,19 +102,19 @@ namespace Geodex.GH.Curves
                     pt = new Geodex.Curves.Closed.Limacon(t, v[0], v[1]).Location;
                     break;
                 case "Lissajous":
-                    pt = new Geodex.Curves.Closed.Lissajous(t, v[0], v[1],v[2]).Location;
+                    pt = new Geodex.Curves.Closed.Lissajous(t, v[0], v[1], v[2]).Location;
                     break;
                 case "Plateau":
                     pt = new Geodex.Curves.Closed.Plateau(t, v[0], v[1]).Location;
                     break;
                 case "Super Ellipse":
-                    pt = new Geodex.Curves.Closed.SuperEllipse(t, v[0], v[1],v[2]).Location;
+                    pt = new Geodex.Curves.Closed.SuperEllipse(t, v[0], v[1], v[2]).Location;
                     break;
                 case "Teardrop":
                     pt = new Geodex.Curves.Closed.Teardrop(t, v[0]).Location;
                     break;
                 default:
-                    pt = new Geodex.Curves.Closed.Circle(t,v[0]).Location;
+                    pt = new Geodex.Curves.Closed.Circle(t, v[0]).Location;
                     break;
             }
 
@@ -137,7 +139,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("4a52e65a-c4bf-496f-892f-7e6d1d222d10"); }
+            get { return new Guid("7be4f211-35cf-4e6e-995d-4d44bea96e8d"); }
         }
     }
 }

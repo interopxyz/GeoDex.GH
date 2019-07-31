@@ -55,7 +55,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Curves\Closed.cs" />
+    <Compile Include="Curves\Cyclic.cs" />
+    <Compile Include="Curves\Fixed.cs" />
+    <Compile Include="Curves\Open.cs" />
+    <Compile Include="Curves\Other.cs" />
+    <Compile Include="Curves\Periodic.cs" />
+    <Compile Include="Curves\Spatial.cs" />
+    <Compile Include="Curves\Spiral.cs" />
     <Compile Include="GeoDex.GHInfo.cs" />
+    <Compile Include="GeodexBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Volumes\Volumes.cs" />
   </ItemGroup>
