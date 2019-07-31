@@ -10,15 +10,16 @@ namespace Geodex.GH.Volumes
 {
     public class Volumes : GeodexBase
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the Volumes class.
         /// </summary>
         public Volumes()
           : base("Volume Plots", "Volumes", "A Series of volume shell equations", "Vector", "Plots")
         {
-            entries = new string[]{ "Astroidal Ellipsoid", "Conocuneus", "Ellipsoid", "Sphere", "Superformula", "Torus", "Torus Ellipse"};
-            inputs = new int[] { 0,4,3,1,12,2,3 };
+            entries = new string[] { "Astroidal Ellipsoid", "Conocuneus", "Ellipsoid", "Sphere", "Superformula", "Torus", "Torus Ellipse" };
+            inputs = new int[] { 0, 4, 3, 1, 12, 2, 3 };
+            SetInputs();
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddPointParameter("Point", "P", "The plotted Point 3d", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point", "P", "The plotted coordinate point", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -51,8 +52,8 @@ namespace Geodex.GH.Volumes
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-                Vector3d vc = new Vector3d();
-                DA.GetData(0, ref vc);
+            Vector3d vc = new Vector3d();
+            DA.GetData(0, ref vc);
             Geodex.UV uv = new UV(vc.X, vc.Y);
             Geodex.Point pt = new Point();
 
@@ -60,11 +61,11 @@ namespace Geodex.GH.Volumes
 
             switch (entries[index])
             {
-                case "AstroidalEllipsoid":
+                case "Astroidal Ellipsoid":
                     pt = new Geodex.Volumes.AstroidalEllipsoid(uv).Location;
                     break;
                 case "Conocuneus":
-                    pt = new Geodex.Volumes.Conocuneus(uv,v[0],v[1],v[2],v[3]).Location;
+                    pt = new Geodex.Volumes.Conocuneus(uv, v[0], v[1], v[2], v[3]).Location;
                     break;
                 case "Ellipsoid":
                     pt = new Geodex.Volumes.Ellipsoid(uv, v[0], v[1], v[2]).Location;
@@ -75,7 +76,7 @@ namespace Geodex.GH.Volumes
                 case "Torus":
                     pt = new Geodex.Volumes.Torus(uv).Location;
                     break;
-                case "TorusEllipse":
+                case "Torus Ellipse":
                     pt = new Geodex.Volumes.TorusEllipse(uv).Location;
                     break;
                 default:
@@ -83,8 +84,8 @@ namespace Geodex.GH.Volumes
                     break;
             }
 
-                DA.SetData(0, new Point3d(pt.X,pt.Y,pt.Z));
-            }
+            DA.SetData(0, new Point3d(pt.X, pt.Y, pt.Z));
+        }
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -95,7 +96,7 @@ namespace Geodex.GH.Volumes
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Geodex_Volume_Spatial_01;
             }
         }
 

@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace Geodex.GH.Curves
+namespace Geodex.GH.Surfaces
 {
-    public class Cyclic : GeodexBase
+    public class Loop : GeodexBase
     {
         /// <summary>
-        /// Initializes a new instance of the Cyclic class.
+        /// Initializes a new instance of the Loop class.
         /// </summary>
-        public Cyclic()
-          : base("Cyclic Curve Plots", "Cyclic Curve", "A series of closed curve equations", "Vector", "Plots")
+        public Loop()
+          : base("Loop Surface Plots", "Loop Surface", "A series of surface equations", "Vector", "Plots")
         {
-            entries = new string[] { "Cyclic Harmonic", "Epicycloid", "Epitrochoid", "Hypocycloid A", "Hypocycloid B", "Hypotrochoid", "Leaf", "Rhodonea", "Rose", "Superformula" };
-            inputs = new int[] { 3, 2, 3, 2, 1, 2, 3, 1, 2, 6 };
+            entries = new string[] { "Catenoid", "Funnel", "Gabriels", "Hyperboloid A", "Hyperboloid B", "Mobius", "Pseudosphere" };
+            inputs = new int[] { 1,1,0,2,2,1,0 };
             SetInputs();
         }
 
@@ -24,7 +24,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.primary; }
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddNumberParameter("Parameter", "T", "A scalar number parameter most commonly between [0-1], [0,2], and [-1,1]", GH_ParamAccess.item, 0.5);
+            pManager.AddVectorParameter("2d Vector", "UV", "A unitized vector most commonly between [0-1], [0,2], and [-1,1]. Z will be ignored", GH_ParamAccess.item, new Vector3d(0.5, 0.5, 0));
         }
 
         /// <summary>
@@ -49,8 +49,10 @@ namespace Geodex.GH.Curves
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            double t = 0.5;
-            DA.GetData(0, ref t);
+            Vector3d vc = new Vector3d();
+            DA.GetData(0, ref vc);
+
+            UV uv = new UV(vc.X, vc.Y);
 
             Geodex.Point pt = new Point();
 
@@ -58,41 +60,32 @@ namespace Geodex.GH.Curves
 
             switch (entries[index])
             {
-                case "Cyclic Harmonic":
-                    pt = new Geodex.Curves.Cyclic.CyclicHarmonic(t, v[0], v[1],v[2]).Location;
+
+                case "Catenoid":
+                    pt = new Geodex.Surfaces.Loop.Catenoid(uv,v[0]).Location;
                     break;
-                case "Epicycloid":
-                    pt = new Geodex.Curves.Cyclic.Epicycloid(t, v[0], v[1]).Location;
+                case "Funnel":
+                    pt = new Geodex.Surfaces.Loop.Funnel(uv,v[0]).Location;
                     break;
-                case "Epitrochoid":
-                    pt = new Geodex.Curves.Cyclic.Epitrochoid(t, v[0], v[1],v[2]).Location;
+                case "Gabriels":
+                    pt = new Geodex.Surfaces.Loop.Gabriels(uv).Location;
                     break;
-                case "Hypocycloid A":
-                    pt = new Geodex.Curves.Cyclic.Hypocycloid_A(t, v[0], v[1]).Location;
+                case "Hyperboloid A":
+                    pt = new Geodex.Surfaces.Loop.Hyperboloid_A(uv,v[0],v[1]).Location;
                     break;
-                case "Hypocycloid B":
-                    pt = new Geodex.Curves.Cyclic.Hypocycloid_B(t, v[0]).Location;
+                case "Hyperboloid B":
+                    pt = new Geodex.Surfaces.Loop.Hyperboloid_B(uv, v[0], v[1]).Location;
                     break;
-                case "Hypotrochoid":
-                    pt = new Geodex.Curves.Cyclic.Hypotrochoid(t, v[0], v[1]).Location;
-                    break;
-                case "Leaf":
-                    pt = new Geodex.Curves.Cyclic.Leaf(t, v[0], v[1],v[2]).Location;
-                    break;
-                case "Rose":
-                    pt = new Geodex.Curves.Cyclic.Rose(t, v[0], v[1]).Location;
-                    break;
-                case "Superformula":
-                    pt = new Geodex.Curves.Cyclic.Superformula(t, v[0], v[1], v[2], v[3], v[4], v[5]).Location;
+                case "Mobius":
+                    pt = new Geodex.Surfaces.Loop.Mobius(uv, v[0]).Location;
                     break;
                 default:
-                    pt = new Geodex.Curves.Cyclic.Rhodonea(t, v[0]).Location;
+                    pt = new Geodex.Surfaces.Loop.Pseudosphere(uv).Location;
                     break;
             }
 
             DA.SetData(0, new Point3d(pt.X, pt.Y, pt.Z));
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -102,7 +95,7 @@ namespace Geodex.GH.Curves
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Geodex_Curves_Cyclic;
+                return Properties.Resources.Geodex_Surface_Loop;
             }
         }
 
@@ -111,7 +104,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("7be4f211-35cf-4e6e-995d-4d44bea96e8d"); }
+            get { return new Guid("9c98de7e-98f5-4bdb-afee-8ac80e26a666"); }
         }
     }
 }

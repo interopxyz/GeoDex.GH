@@ -24,7 +24,6 @@ namespace Geodex.GH
         public GeodexBase()
           : base("Geodex Base", "Geodex Base", "---", "Vector", "Plots")
         {
-            SetInputs();
         }
 
         public GeodexBase(string name, string nickname, string description, string category, string subCategory)
@@ -45,6 +44,7 @@ namespace Geodex.GH
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            pManager.AddGenericParameter("A", "A", "A", GH_ParamAccess.item);
         }
 
         /// <summary>

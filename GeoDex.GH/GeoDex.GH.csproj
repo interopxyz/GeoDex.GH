@@ -65,10 +65,21 @@
     <Compile Include="GeoDex.GHInfo.cs" />
     <Compile Include="GeodexBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Surfaces\Intersecting.cs" />
+    <Compile Include="Surfaces\Loop.cs" />
+    <Compile Include="Surfaces\Open.cs" />
     <Compile Include="Volumes\Volumes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Surfaces\" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\Documents\GitHub\Interop\GeoDex\Geodex\Geodex.csproj">
@@ -79,6 +90,42 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Spiral.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Surface_Intersect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Surface_Loop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Surface_Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Volume_Spatial-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Closed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Cyclic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Fixed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Other.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Periodic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geodex_Curves_Spatial.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,8 +14,9 @@ namespace Geodex.GH.Curves
         public Spiral()
           : base("Spiral Curve Plots", "Spiral Curve", "A series of closed curve equations", "Vector", "Plots")
         {
-            entries = new string[] { "AntiClothoid", "Archimedean", "Cochleoid", "Coth", "Fermat", "Hyperbolic", "Lituus", "Logarithmic", "Reciprocal", "TanH" };
+            entries = new string[] { "Anti Clothoid", "Archimedean", "Cochleoid", "Coth", "Fermat", "Hyperbolic", "Lituus", "Logarithmic", "Reciprocal", "TanH" };
             inputs = new int[] { 0, 1, 1, 1, 1, 1, 0, 1, 0, 1 };
+            SetInputs();
         }
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.primary; }
+            get { return GH_Exposure.primary|GH_Exposure.obscure; }
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Test", "T", "---", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point", "P", "The plotted coordinate point", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace Geodex.GH.Curves
 
             switch (entries[index])
             {
-                case "AntiClothoid":
+                case "Anti Clothoid":
                     pt = new Geodex.Curves.Spiral.AntiClothoid(t).Location;
                     break;
                 case "Cochleoid":
@@ -102,7 +103,7 @@ namespace Geodex.GH.Curves
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Geodex_Curves_Spiral;
             }
         }
 

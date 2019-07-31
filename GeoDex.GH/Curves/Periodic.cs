@@ -14,8 +14,9 @@ namespace Geodex.GH.Curves
         public Periodic()
           : base("Periodic Curve Plots", "Periodic Curve", "A series of closed curve equations", "Vector", "Plots")
         {
-            entries = new string[] { "Alain", "Besace_A", "Besace_B", "Bifolium", "Biquartic", "BoothsLemniscate", "BoothsOvals", "Cassini", "Circle", "Ellipse", "Folium", "FreethNephroid", "Limacon", "Lissajous", "Plateau", "SuperEllipse", "Teardrop" };
-            inputs = new int[] { 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 1, 2, 3, 2, 3, 1 };
+            entries = new string[] { "Abdank", "Cosine", "Cycloid", "Sine", "Trochoid" };
+            inputs = new int[] { 1,0,0,0,2 };
+            SetInputs();
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Test", "T", "---", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point", "P", "The plotted coordinate point", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -57,54 +58,20 @@ namespace Geodex.GH.Curves
 
             switch (entries[index])
             {
-
-                case "Alain":
-                    pt = new Geodex.Curves.Closed.Alain(t, v[0], v[1]).Location;
+                case "Abdank":
+                    pt = new Geodex.Curves.Periodic.Abdank(t, v[0]).Location;
                     break;
-                case "Besace A":
-                    pt = new Geodex.Curves.Closed.Besace_A(t, v[0], v[1]).Location;
-                    break;
-                case "Besace B":
-                    pt = new Geodex.Curves.Closed.Besace_B(t, v[0], v[1]).Location;
-                    break;
-                case "Bifolium":
-                    pt = new Geodex.Curves.Closed.Bifolium(t, v[0], v[1]).Location;
-                    break;
-                case "Biquartic":
-                    pt = new Geodex.Curves.Closed.Biquartic(t, v[0]).Location;
-                    break;
-                case "Booths Lemniscate":
-                    pt = new Geodex.Curves.Closed.BoothsLemniscate(t, v[0], v[1]).Location;
-                    break;
-                case "Booths Ovals":
-                    pt = new Geodex.Curves.Closed.BoothsOvals(t, v[0], v[1]).Location;
-                    break;
-                case "Ellipse":
-                    pt = new Geodex.Curves.Closed.Ellipse(t, v[0], v[1]).Location;
-                    break;
-                case "Folium":
-                    pt = new Geodex.Curves.Closed.Folium(t, v[0], v[1]).Location;
-                    break;
-                case "Freeth Nephroid":
-                    pt = new Geodex.Curves.Closed.FreethNephroid(t, v[0]).Location;
-                    break;
-                case "Limacon":
-                    pt = new Geodex.Curves.Closed.Limacon(t, v[0], v[1]).Location;
-                    break;
-                case "Lissajous":
-                    pt = new Geodex.Curves.Closed.Lissajous(t, v[0], v[1], v[2]).Location;
-                    break;
-                case "Plateau":
-                    pt = new Geodex.Curves.Closed.Plateau(t, v[0], v[1]).Location;
-                    break;
-                case "Super Ellipse":
-                    pt = new Geodex.Curves.Closed.SuperEllipse(t, v[0], v[1], v[2]).Location;
-                    break;
-                case "Teardrop":
-                    pt = new Geodex.Curves.Closed.Teardrop(t, v[0]).Location;
+                case "Cosine":
+                    pt = new Geodex.Curves.Periodic.Cosine(t).Location;
+                    break;                                  
+                case "Cycloid":                             
+                    pt = new Geodex.Curves.Periodic.Cycloid(t).Location;
+                    break;                                  
+                case "Trochoid":                            
+                    pt = new Geodex.Curves.Periodic.Trochoid(t,v[0],v[1]).Location;
                     break;
                 default:
-                    pt = new Geodex.Curves.Closed.Circle(t, v[0]).Location;
+                    pt = new Geodex.Curves.Periodic.Sine(t).Location;
                     break;
             }
 
@@ -120,7 +87,7 @@ namespace Geodex.GH.Curves
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Geodex_Curves_Periodic;
             }
         }
 

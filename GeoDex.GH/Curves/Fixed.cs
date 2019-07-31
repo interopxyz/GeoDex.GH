@@ -14,8 +14,10 @@ namespace Geodex.GH.Curves
         public Fixed()
           : base("Fixed Curve Plots", "Fixed Curve", "A series of closed curve equations", "Vector", "Plots")
         {
-            entries = new string[] { "Alain", "Besace_A", "Besace_B", "Bifolium", "Biquartic", "BoothsLemniscate", "BoothsOvals", "Cassini", "Circle", "Ellipse", "Folium", "FreethNephroid", "Limacon", "Lissajous", "Plateau", "SuperEllipse", "Teardrop" };
-            inputs = new int[] { 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 1, 2, 3, 2, 3, 1 };
+
+            entries = new string[] { "Asteroid", "Bicorn", "Butterfly", "Cardioid", "Cayleys Sextic", "Double Folium", "Fish", "Humbert Cubic", "Kappa", "Kiss", "Lemniscate", "Maltese Cross", "Nephroid", "Quadrifolium", "Talbot", "Tricuspoid", "Trifolium", "Watts" };
+            inputs = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            SetInputs();
         }
 
         /// <summary>
@@ -23,7 +25,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.primary; }
+            get { return GH_Exposure.primary | GH_Exposure.obscure; }
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace Geodex.GH.Curves
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Test", "T", "---", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point", "P", "The plotted coordinate point", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -53,58 +55,61 @@ namespace Geodex.GH.Curves
 
             Geodex.Point pt = new Point();
 
-            List<double> v = GetValues(DA);
-
             switch (entries[index])
             {
-
-                case "Alain":
-                    pt = new Geodex.Curves.Closed.Alain(t, v[0], v[1]).Location;
+                case "Bicorn":
+                    pt = new Geodex.Curves.Fixed.Bicorn(t).Location;
                     break;
-                case "Besace A":
-                    pt = new Geodex.Curves.Closed.Besace_A(t, v[0], v[1]).Location;
+                case "Butterfly":
+                    pt = new Geodex.Curves.Fixed.Butterfly(t).Location;
                     break;
-                case "Besace B":
-                    pt = new Geodex.Curves.Closed.Besace_B(t, v[0], v[1]).Location;
+                case "Cardioid":
+                    pt = new Geodex.Curves.Fixed.Cardioid(t).Location;
                     break;
-                case "Bifolium":
-                    pt = new Geodex.Curves.Closed.Bifolium(t, v[0], v[1]).Location;
+                case "Cayleys Sextic":
+                    pt = new Geodex.Curves.Fixed.CayleysSextic(t).Location;
                     break;
-                case "Biquartic":
-                    pt = new Geodex.Curves.Closed.Biquartic(t, v[0]).Location;
+                case "Double Folium":
+                    pt = new Geodex.Curves.Fixed.DoubleFolium(t).Location;
                     break;
-                case "Booths Lemniscate":
-                    pt = new Geodex.Curves.Closed.BoothsLemniscate(t, v[0], v[1]).Location;
+                case "Fish":
+                    pt = new Geodex.Curves.Fixed.Fish(t).Location;
                     break;
-                case "Booths Ovals":
-                    pt = new Geodex.Curves.Closed.BoothsOvals(t, v[0], v[1]).Location;
+                case "Humbert Cubic":
+                    pt = new Geodex.Curves.Fixed.HumbertCubic(t).Location;
                     break;
-                case "Ellipse":
-                    pt = new Geodex.Curves.Closed.Ellipse(t, v[0], v[1]).Location;
+                case "Kappa":
+                    pt = new Geodex.Curves.Fixed.Kappa(t).Location;
                     break;
-                case "Folium":
-                    pt = new Geodex.Curves.Closed.Folium(t, v[0], v[1]).Location;
+                case "Kiss":
+                    pt = new Geodex.Curves.Fixed.Kiss(t).Location;
                     break;
-                case "Freeth Nephroid":
-                    pt = new Geodex.Curves.Closed.FreethNephroid(t, v[0]).Location;
+                case "Lemniscate":
+                    pt = new Geodex.Curves.Fixed.Lemniscate(t).Location;
                     break;
-                case "Limacon":
-                    pt = new Geodex.Curves.Closed.Limacon(t, v[0], v[1]).Location;
+                case "Maltese Cross":
+                    pt = new Geodex.Curves.Fixed.MalteseCross(t).Location;
                     break;
-                case "Lissajous":
-                    pt = new Geodex.Curves.Closed.Lissajous(t, v[0], v[1], v[2]).Location;
+                case "Nephroid":
+                    pt = new Geodex.Curves.Fixed.Nephroid(t).Location;
                     break;
-                case "Plateau":
-                    pt = new Geodex.Curves.Closed.Plateau(t, v[0], v[1]).Location;
+                case "Quadrifolium":
+                    pt = new Geodex.Curves.Fixed.Quadrifolium(t).Location;
                     break;
-                case "Super Ellipse":
-                    pt = new Geodex.Curves.Closed.SuperEllipse(t, v[0], v[1], v[2]).Location;
+                case "Talbot":
+                    pt = new Geodex.Curves.Fixed.Talbot(t).Location;
                     break;
-                case "Teardrop":
-                    pt = new Geodex.Curves.Closed.Teardrop(t, v[0]).Location;
+                case "Tricuspoid":
+                    pt = new Geodex.Curves.Fixed.Tricuspoid(t).Location;
+                    break;
+                case "Trifolium":
+                    pt = new Geodex.Curves.Fixed.Trifolium(t).Location;
+                    break;
+                case "Watts":
+                    pt = new Geodex.Curves.Fixed.Watts(t).Location;
                     break;
                 default:
-                    pt = new Geodex.Curves.Closed.Circle(t, v[0]).Location;
+                    pt = new Geodex.Curves.Fixed.Asteroid(t).Location;
                     break;
             }
 
@@ -120,7 +125,7 @@ namespace Geodex.GH.Curves
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.Geodex_Curves_Fixed;
             }
         }
 
