@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace Geodex.GH.Volumes
+namespace Geodex.GH.Surfaces
 {
-    public class Volumes : GeodexBase
+    public class Loop : GeodexBase
     {
-
         /// <summary>
-        /// Initializes a new instance of the Volumes class.
+        /// Initializes a new instance of the Loop class.
         /// </summary>
-        public Volumes()
-          : base("Volume Plots", "Volumes", "A Series of volume shell equations", "Vector", "Plots")
+        public Loop()
+          : base("Loop Surface Plots", "Loop", "A series of surface equations", "Vector", "Plots")
         {
-            entries = new string[] { "Astroidal Ellipsoid", "Conocuneus", "Ellipsoid", "Sphere", "Superformula", "Torus", "Torus Ellipse" };
-            inputs = new int[] { 0, 4, 3, 1, 12, 2, 3 };
+            entries = new string[] { "Catenoid", "Funnel", "Gabriels", "Hyperboloid A", "Hyperboloid B", "Mobius", "Pseudosphere" };
+            inputs = new int[] { 1,0,0,2,2,1,0 };
             SetInputs();
         }
 
@@ -25,7 +24,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.tertiary; }
+            get { return GH_Exposure.secondary; }
         }
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddVectorParameter("Parameter", "V", "A scalar vector parameter where X and Y properties are most commonly between [0-1], [0,2], and [-1,1]", GH_ParamAccess.item, new Vector3d(0, 0, 0));
+            pManager.AddVectorParameter("2d Vector", "UV", "A unitized vector most commonly between [0-1], [0,2], and [-1,1]. Z will be ignored", GH_ParamAccess.item, new Vector3d(0.5, 0.5, 0));
         }
 
         /// <summary>
@@ -52,39 +51,41 @@ namespace Geodex.GH.Volumes
         {
             Vector3d vc = new Vector3d();
             DA.GetData(0, ref vc);
-            Geodex.UV uv = new UV(vc.X, vc.Y);
+
+            UV uv = new UV(vc.X, vc.Y);
+
             Geodex.Point pt = new Point();
 
             List<double> v = GetValues(DA);
 
             switch (entries[index])
             {
-                case "Astroidal Ellipsoid":
-                    pt = new Geodex.Volumes.AstroidalEllipsoid(uv).Location;
+
+                case "Catenoid":
+                    pt = new Geodex.Surfaces.Loop.Catenoid(uv,v[0]).Location;
                     break;
-                case "Conocuneus":
-                    pt = new Geodex.Volumes.Conocuneus(uv, v[0], v[1], v[2], v[3]).Location;
+                case "Funnel":
+                    pt = new Geodex.Surfaces.Loop.Funnel(uv).Location;
                     break;
-                case "Ellipsoid":
-                    pt = new Geodex.Volumes.Ellipsoid(uv, v[0], v[1], v[2]).Location;
+                case "Gabriels":
+                    pt = new Geodex.Surfaces.Loop.Gabriels(uv).Location;
                     break;
-                case "Superformula":
-                    pt = new Geodex.Volumes.Superformula(uv).Location;
+                case "Hyperboloid A":
+                    pt = new Geodex.Surfaces.Loop.Hyperboloid_A(uv,v[0],v[1]).Location;
                     break;
-                case "Torus":
-                    pt = new Geodex.Volumes.Torus(uv).Location;
+                case "Hyperboloid B":
+                    pt = new Geodex.Surfaces.Loop.Hyperboloid_B(uv, v[0], v[1]).Location;
                     break;
-                case "Torus Ellipse":
-                    pt = new Geodex.Volumes.TorusEllipse(uv).Location;
+                case "Mobius":
+                    pt = new Geodex.Surfaces.Loop.Mobius(uv, v[0]).Location;
                     break;
                 default:
-                    pt = new Geodex.Volumes.Sphere(uv).Location;
+                    pt = new Geodex.Surfaces.Loop.Pseudosphere(uv).Location;
                     break;
             }
 
             DA.SetData(0, new Point3d(pt.X, pt.Y, pt.Z));
         }
-
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -94,7 +95,7 @@ namespace Geodex.GH.Volumes
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Geodex_Volume_Spatial_01;
+                return Properties.Resources.Geodex_Surface_Loop;
             }
         }
 
@@ -103,7 +104,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("c8c1ca8b-45f0-49f0-97ff-d0ee7ab740b7"); }
+            get { return new Guid("9c98de7e-98f5-4bdb-afee-8ac80e26a666"); }
         }
     }
 }

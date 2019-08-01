@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace Geodex.GH.Volumes
+namespace Geodex.GH.Curves
 {
-    public class Volumes : GeodexBase
+    public class Other : GeodexBase
     {
-
         /// <summary>
-        /// Initializes a new instance of the Volumes class.
+        /// Initializes a new instance of the Other class.
         /// </summary>
-        public Volumes()
-          : base("Volume Plots", "Volumes", "A Series of volume shell equations", "Vector", "Plots")
+        public Other()
+          : base("Other Curve Plots", "Other", "A series of curve equations", "Vector", "Plots")
         {
-            entries = new string[] { "Astroidal Ellipsoid", "Conocuneus", "Ellipsoid", "Sphere", "Superformula", "Torus", "Torus Ellipse" };
-            inputs = new int[] { 0, 4, 3, 1, 12, 2, 3 };
+            entries = new string[] { "Catalan", "Conchal", "Conchoid", "Epispiral", "Hippias Quadratrix", "Hyperbola", "Nodal" };
+            inputs = new int[] { 1, 2, 2, 1, 1, 2, 1 };
             SetInputs();
         }
 
@@ -25,7 +24,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         public override GH_Exposure Exposure
         {
-            get { return GH_Exposure.tertiary; }
+            get { return GH_Exposure.primary | GH_Exposure.obscure; }
         }
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddVectorParameter("Parameter", "V", "A scalar vector parameter where X and Y properties are most commonly between [0-1], [0,2], and [-1,1]", GH_ParamAccess.item, new Vector3d(0, 0, 0));
+            pManager.AddNumberParameter("Parameter", "T", "A scalar number parameter most commonly between [0-1], [0,2], and [-1,1]", GH_ParamAccess.item, 0.5);
         }
 
         /// <summary>
@@ -50,35 +49,35 @@ namespace Geodex.GH.Volumes
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Vector3d vc = new Vector3d();
-            DA.GetData(0, ref vc);
-            Geodex.UV uv = new UV(vc.X, vc.Y);
+            double t = 0.5;
+            DA.GetData(0, ref t);
+
             Geodex.Point pt = new Point();
 
             List<double> v = GetValues(DA);
 
             switch (entries[index])
             {
-                case "Astroidal Ellipsoid":
-                    pt = new Geodex.Volumes.AstroidalEllipsoid(uv).Location;
+                case "Catalan":
+                    pt = new Geodex.Curves.Other.Catalan(t, v[0]).Location;
                     break;
-                case "Conocuneus":
-                    pt = new Geodex.Volumes.Conocuneus(uv, v[0], v[1], v[2], v[3]).Location;
+                case "Conchal":
+                    pt = new Geodex.Curves.Other.Conchal(t, v[0], v[1]).Location;
                     break;
-                case "Ellipsoid":
-                    pt = new Geodex.Volumes.Ellipsoid(uv, v[0], v[1], v[2]).Location;
+                case "Conchoid":
+                    pt = new Geodex.Curves.Other.Conchoid(t, v[0], v[1]).Location;
                     break;
-                case "Superformula":
-                    pt = new Geodex.Volumes.Superformula(uv).Location;
+                case "Hippias Quadratrix":
+                    pt = new Geodex.Curves.Other.HippiasQuadratrix(t, v[0]).Location;
                     break;
-                case "Torus":
-                    pt = new Geodex.Volumes.Torus(uv).Location;
+                case "Hyperbola":
+                    pt = new Geodex.Curves.Other.Hyperbola(t, v[0], v[1]).Location;
                     break;
-                case "Torus Ellipse":
-                    pt = new Geodex.Volumes.TorusEllipse(uv).Location;
+                case "Nodal":
+                    pt = new Geodex.Curves.Other.Nodal(t, v[0]).Location;
                     break;
                 default:
-                    pt = new Geodex.Volumes.Sphere(uv).Location;
+                    pt = new Geodex.Curves.Other.Epispiral(t).Location;
                     break;
             }
 
@@ -94,7 +93,7 @@ namespace Geodex.GH.Volumes
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Geodex_Volume_Spatial_01;
+                return Properties.Resources.Geodex_Curves_Other;
             }
         }
 
@@ -103,7 +102,7 @@ namespace Geodex.GH.Volumes
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("c8c1ca8b-45f0-49f0-97ff-d0ee7ab740b7"); }
+            get { return new Guid("fa2257f2-fe59-4703-bf4c-f4a5c138de03"); }
         }
     }
 }
