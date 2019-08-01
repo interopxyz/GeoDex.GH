@@ -12,7 +12,7 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Fixed class.
         /// </summary>
         public Fixed()
-          : base("Fixed Curve Plots", "Fixed Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Fixed Curve Plots", "Fixed", "A series of curve equations", "Vector", "Plots")
         {
 
             entries = new string[] { "Asteroid", "Bicorn", "Butterfly", "Cardioid", "Cayleys Sextic", "Double Folium", "Fish", "Humbert Cubic", "Kappa", "Kiss", "Lemniscate", "Maltese Cross", "Nephroid", "Quadrifolium", "Talbot", "Tricuspoid", "Trifolium", "Watts" };

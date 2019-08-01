@@ -12,7 +12,7 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Cyclic class.
         /// </summary>
         public Cyclic()
-          : base("Cyclic Curve Plots", "Cyclic Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Cyclic Curve Plots", "Cyclic", "A series of curve equations", "Vector", "Plots")
         {
             entries = new string[] { "Cyclic Harmonic", "Epicycloid", "Epitrochoid", "Hypocycloid A", "Hypocycloid B", "Hypotrochoid", "Leaf", "Rhodonea", "Rose", "Superformula" };
             inputs = new int[] { 3, 2, 3, 2, 1, 2, 3, 1, 2, 6 };
@@ -21,7 +21,7 @@ namespace Geodex.GH.Curves
 
         /// <summary>
         /// Set Exposure level for the component.
-        /// </summary>
+        /// </summary> 
         public override GH_Exposure Exposure
         {
             get { return GH_Exposure.primary; }

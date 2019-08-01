@@ -12,10 +12,10 @@ namespace Geodex.GH.Surfaces
         /// Initializes a new instance of the Loop class.
         /// </summary>
         public Loop()
-          : base("Loop Surface Plots", "Loop Surface", "A series of surface equations", "Vector", "Plots")
+          : base("Loop Surface Plots", "Loop", "A series of surface equations", "Vector", "Plots")
         {
             entries = new string[] { "Catenoid", "Funnel", "Gabriels", "Hyperboloid A", "Hyperboloid B", "Mobius", "Pseudosphere" };
-            inputs = new int[] { 1,1,0,2,2,1,0 };
+            inputs = new int[] { 1,0,0,2,2,1,0 };
             SetInputs();
         }
 
@@ -65,7 +65,7 @@ namespace Geodex.GH.Surfaces
                     pt = new Geodex.Surfaces.Loop.Catenoid(uv,v[0]).Location;
                     break;
                 case "Funnel":
-                    pt = new Geodex.Surfaces.Loop.Funnel(uv,v[0]).Location;
+                    pt = new Geodex.Surfaces.Loop.Funnel(uv).Location;
                     break;
                 case "Gabriels":
                     pt = new Geodex.Surfaces.Loop.Gabriels(uv).Location;

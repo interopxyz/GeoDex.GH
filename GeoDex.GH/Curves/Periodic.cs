@@ -12,7 +12,7 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Periodic class.
         /// </summary>
         public Periodic()
-          : base("Periodic Curve Plots", "Periodic Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Periodic Curve Plots", "Periodic", "A series of curve equations", "Vector", "Plots")
         {
             entries = new string[] { "Abdank", "Cosine", "Cycloid", "Sine", "Trochoid" };
             inputs = new int[] { 1,0,0,0,2 };

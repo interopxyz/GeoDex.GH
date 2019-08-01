@@ -12,7 +12,7 @@ namespace Geodex.GH.Surfaces
         /// Initializes a new instance of the Intersecting class.
         /// </summary>
         public Intersecting()
-          : base("Intersecting Surface Plots", "Intersecting Surface", "A series of surface equations", "Vector", "Plots")
+          : base("Intersecting Surface Plots", "Intersecting", "A series of surface equations", "Vector", "Plots")
         {
 
             entries = new string[] { "Bohemian Dome", "Boy", "Cartan", "Conoid", "CrossCap A", "CrossCap B", "Pear", "Roman To Boy", "Roman A", "Roman B", "Sine", "Whitney" };

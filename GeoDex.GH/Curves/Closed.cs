@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
-using System.Linq;
-
-using Geodex;
-using System.Collections;
-using System.Windows.Forms;
-using System.Drawing;
 
 namespace Geodex.GH.Curves
 {
@@ -20,7 +13,7 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Closed class.
         /// </summary>
         public Closed()
-          : base("Closed Curve Plots", "Closed Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Closed Curve Plots", "Closed", "A series of curve equations", "Vector", "Plots")
         {
             entries = new string[] { "Alain", "Besace A", "Besace B", "Bifolium", "Biquartic", "Booths Lemniscate", "Booths Ovals", "Cassini", "Circle", "Ellipse", "Folium", "Freeth Nephroid", "Limacon", "Lissajous", "Plateau", "Super Ellipse", "Teardrop" };
             inputs = new int[] { 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 1, 2, 3, 2, 3, 1 };

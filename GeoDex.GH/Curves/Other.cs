@@ -12,10 +12,10 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Other class.
         /// </summary>
         public Other()
-          : base("Other Curve Plots", "Other Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Other Curve Plots", "Other", "A series of curve equations", "Vector", "Plots")
         {
-            entries = new string[] { "Catalan", "Conchal", "Conchoid", "Epispiral", "Hippias Quadratrix", "Hyperbola", "Kampyle", "Nodal" };
-            inputs = new int[] { 1, 2, 2, 1, 1, 2, 2, 1 };
+            entries = new string[] { "Catalan", "Conchal", "Conchoid", "Epispiral", "Hippias Quadratrix", "Hyperbola", "Nodal" };
+            inputs = new int[] { 1, 2, 2, 1, 1, 2, 1 };
             SetInputs();
         }
 
@@ -72,9 +72,6 @@ namespace Geodex.GH.Curves
                     break;
                 case "Hyperbola":
                     pt = new Geodex.Curves.Other.Hyperbola(t, v[0], v[1]).Location;
-                    break;
-                case "Kampyle":
-                    pt = new Geodex.Curves.Other.Kampyle(t, v[0], v[1]).Location;
                     break;
                 case "Nodal":
                     pt = new Geodex.Curves.Other.Nodal(t, v[0]).Location;

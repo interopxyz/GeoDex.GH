@@ -12,7 +12,7 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Spiral class.
         /// </summary>
         public Spiral()
-          : base("Spiral Curve Plots", "Spiral Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Spiral Curve Plots", "Spiral", "A series of curve equations", "Vector", "Plots")
         {
             entries = new string[] { "Anti Clothoid", "Archimedean", "Cochleoid", "Coth", "Fermat", "Hyperbolic", "Lituus", "Logarithmic", "Reciprocal", "TanH" };
             inputs = new int[] { 0, 1, 1, 1, 1, 1, 0, 1, 0, 1 };

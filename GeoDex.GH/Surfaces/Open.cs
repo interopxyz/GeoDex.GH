@@ -12,7 +12,7 @@ namespace Geodex.GH.Surfaces
         /// Initializes a new instance of the Open class.
         /// </summary>
         public Open()
-          : base("Open Surface Plots", "Open Surface", "A series of surface equations", "Vector", "Plots")
+          : base("Open Surface Plots", "Open", "A series of surface equations", "Vector", "Plots")
         {
             entries = new string[] { "Coil", "Crate", "Dini", "Enneper A", "Enneper B", "Enneper C", "Gaudi", "Guimards", "Helicoid", "Helicoid Developable", "Helicoid Minimal", "Hyperbolic Paraboloid A", "Hyperbolic Paraboloid B", "Hyperbolic Paraboloid C", "Monkey A", "Monkey B", "Shell" };
             inputs = new int[] { 3,2,1,0,0,1,2,3,1,2,1,3,3,1,1,1,5 };

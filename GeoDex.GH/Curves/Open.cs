@@ -12,10 +12,10 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Open class.
         /// </summary>
         public Open()
-          : base("Open Curve Plots", "Open Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Open Curve Plots", "Open", "A series of curve equations", "Vector", "Plots")
         {
             entries = new string[] { "Agnesi", "Catenary Equal Strength", "Cissoid", "Frequency", "Logarithmic", "Parabola", "Right Strophoid", "Serpentine", "Sluze Cubic", "Tractrix", "Trisectrix" };
-            inputs = new int[] { 2,1,1,0,2,1,1,2,2,0,0 };
+            inputs = new int[] { 2,1,1,0,0,1,1,2,2,0,0 };
             SetInputs();
         }
 
@@ -71,7 +71,7 @@ namespace Geodex.GH.Curves
                     pt = new Geodex.Curves.Open.Frequency(t).Location;
                     break;
                 case "Logarithmic":
-                    pt = new Geodex.Curves.Open.Logarithmic(t, v[0], v[1]).Location;
+                    pt = new Geodex.Curves.Open.Logarithmic(t).Location;
                     break;
                 case "Parabola":
                     pt = new Geodex.Curves.Open.Parabola(t, v[0]).Location;

@@ -12,7 +12,7 @@ namespace Geodex.GH.Curves
         /// Initializes a new instance of the Spatial class.
         /// </summary>
         public Spatial()
-          : base("Spatial Curve Plots", "Spatial Curve", "A series of closed curve equations", "Vector", "Plots")
+          : base("Spatial Curve Plots", "Spatial", "A series of curve equations", "Vector", "Plots")
         {
             entries = new string[] { "Archytas", "Baseball", "Basin", "Billiard Knot", "Clelies", "Helix", "Loxodrome", "Torus Asymptotic", "Torus Knot", "Vivianis" };
             inputs = new int[] { 0,2,4,3,2,0,1,2,4,0 };
